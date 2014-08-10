@@ -52,11 +52,10 @@ END {
                 run();
             }
         }
-        # printf("IPX: %d,IPY: %d, INS: %s, DIR: %s, STACKPTR: %d\n",  IPX, IPY, INS, DIR, STACKPTR);
         set_ip();
 
         if (DEBUG == 1) {
-            system("sleep 0.01; clear");
+            system("sleep 0.10; clear");
             for(y=1; y<=MAXGRIDY; y++) {
                 for(x=1; x<=MAXGRIDX; x++) {
                     if (IPX == x && IPY == y) {
@@ -67,6 +66,12 @@ END {
                 }
                 print ""
             }
+            printf("IPX: %d,IPY: %d, INS: %s, DIR: %s, STACKPTR: %d\n",  IPX, IPY, INS, DIR, STACKPTR);
+            printf("STACK: ");
+            for(i=1; i<=STACKPTR; i++) {
+                printf("%d ", STACK[i]);
+            }
+            printf("\n\n");
         }
 
     } while (RUNNING == 1);
@@ -173,7 +178,8 @@ function run() {
         RUNNING = 0;
     } else if (INS == "&") {
         getline input < "/dev/tty";
-        push_int(gsub(/[^0-9]/, "", input));
+        gsub(/[^0-9]/, "", input);
+        push_int(input);
     } else if (INS == "~") {
         "bash -c 'read -s -r -N1 buf; echo -n $buf'" | getline input
         close("bash -c 'read -s -r -N1 buf; echo -n $buf'");
