@@ -42,7 +42,9 @@ END {
     do {
         INS=get_ins(IPX, IPY);
         if (INS != -1) {
-            if (index("^>v<", INS)) {
+            if (ASCIIMODE) {
+                run();
+            } else if (index("^>v<", INS)) {
                 DIR=INS;
             } else if (INS == "?") {
                 DIR=randdir();
