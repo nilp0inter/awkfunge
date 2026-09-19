@@ -134,7 +134,7 @@ function run() {
     } else if (INS == "%") {
         push_int(pop()%pop());
     } else if (INS == "#") {
-        set_ip();  /* Trampoline. Skip next cell */
+        set_ip();  # Trampoline. Skip next cell
     } else if (INS == "_") {
         if (pop() == 0) {
             DIR=">";
@@ -173,7 +173,7 @@ function run() {
         push_int(a);
         push_int(b);
     } else if (INS == " ") {
-        /* Do nothing */
+        # Do nothing
     } else if (INS == "@") {
         RUNNING = 0;
     } else if (INS == "&") {
